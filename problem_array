@@ -149,7 +149,7 @@ class Solution:
                 return i
         return -1
     
-     def missingNumberOptimal(self, nums):
+    def missingNumberOptimal(self, nums):
         xor1 = 0
         xor2 = 0
         n = len(nums)
