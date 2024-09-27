@@ -171,7 +171,7 @@ class Solution:
         last = nums[0]
         cnt = 1
 
-        for i in range(1, n):
+        for i in range(1, len(nums)):
             if nums[i] - last >= mid:
                 cnt += 1 
                 last = nums[i]
