@@ -5,6 +5,7 @@ class Node:
         self.next = next
         self.prev = prev
 
+
 class DoublyLinkedList:
 
     def __init__(self, head=None):
@@ -20,7 +21,7 @@ class DoublyLinkedList:
         cur = head
 
         for i in range(1, n):
-            cur.next = Node(arr[i], prev= cur)
+            cur.next = Node(arr[i], prev=cur)
             cur = cur.next
         self.head = head
         return head
@@ -42,9 +43,52 @@ class DoublyLinkedList:
         current = head
         while current.next is not None:
             current = current.next
-        
+
         current.prev.next = None
         return head
+
+    def deleteKthElement(self, head, k):
+        if head is None:
+            return head
+
+        current = head
+        i = 0
+        while current is not None:
+            i += 1
+            if k == i:
+                break
+
+            current = current.next
+
+        if current is None:
+            return head
+
+        front = current.next
+        back = current.prev
+
+        if back is None and front is None:
+            return None
+        elif front is None:
+            back.next = None
+        elif back is None:
+            head = front
+            front.prev = None
+        else:
+            front.prev = back
+            back.next = front
+
+        return head
+
+    def deleteGivenNode(self, node):
+        front = node.next
+        prev = node.prev
+
+        if front is None:
+            prev.next = front
+            return
+
+        prev.next = front
+        front.prev = prev
 
 
 def printLinkedList(head):
