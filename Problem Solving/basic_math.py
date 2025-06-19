@@ -1,7 +1,30 @@
 import math
 
+MAX_N = 100000
+SPF = [1] * (MAX_N+1)
 
 class Solution:
+
+    def __init__(self):
+        self.seive()
+
+    def seive(self):
+        for i in range(2, MAX_N+1):
+            if SPF[i] == 1:
+                for j in range(i, MAX_N+1, i):
+                    if SPF[j] == 1:
+                        SPF[j] = i
+
+
+    def primeFact(self, n):
+        ans = []
+
+        while n != 1:
+            ans.append(SPF[n])
+            n = n//SPF[n]
+        return ans
+
+
     # Function to count all digits in n
     def countDigit(self, n):
         # Edge case
@@ -142,6 +165,32 @@ class Solution:
             if n % i == 0:
                 divs.append(i)
         return divs 
+
+
+    def seiveOfEratosthenes(self, n):
+
+        isPrime = [True]*(n+1)
+        isPrime[0] = isPrime[1] = False
+
+        for i in range(2, int(n**0.5)+1):
+
+            if isPrime[i]:
+                for j in range(i*i, n+1, i):
+                    isPrime[j] = False
+
+        primes = [i for i in range(n+1) if isPrime[i]]
+        return primes
+
+
+    def primeFactors(self, queries):
+        ans = []
+
+        for query in queries:
+            ans.append(self.primeFact(query))
+
+        return ans
+        
+
     
     
     
@@ -159,16 +208,17 @@ class Solution:
     
     
     def main(self):
-       # N = int(input())
-        N1 = int(input())
-        N2 = int(input())
+        # N = int(input())
+        # N1 = int(input())
+        # N2 = int(input())
 
         # Create an instance of the Solution class
         # Creating an instance of Solution class
         sol = Solution()
 
         # Function call to get count of digits in n
-        ans = sol.LCM(N1, N2)
+        # ans = sol.LCM(N1, N2)
+        ans = sol.primeFactors([7, 12, 18])
         print(f"The ans is: {ans}")
 
 if __name__ == "__main__":

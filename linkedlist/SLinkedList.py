@@ -28,7 +28,7 @@ class SinglyLinkedList:
 def printLinkedList(head):
     current = head
     while current is not None:
-        print(f"{current.val} ->", end = "")
+        print(f"{current.val} -> ", end = "")
         current = current.next
     print("None")
 
